@@ -1,0 +1,106 @@
+/* Customize your main colors in :root variables */
+:root {
+  --main-background-color: #343a50;
+  --card-background-color: #321649;
+  --countdown-background-color: #433765;
+  --main-text-color: #f7f6f4;
+  --title-text-color: #180b3a;
+}
+
+body {
+  /*  background-color:var(--main-background-color);*/
+  background: url("img/background.png");
+  background-size: cover;
+  font-family: "Baloo 2", cursive;
+  font-size: 1.1em;
+}
+
+h2,
+p {
+  color: var(--main-text-color);
+}
+
+h3 {
+  font-weight: normal;
+}
+
+#innerContainer {
+  padding: 16px;
+  background-color: #180b3a;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+#left {
+  flex: 1;
+}
+.leftFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  margin: 24px 44px;
+  border-top: 1px solid #343a50;
+}
+.lfooterLeft h3 {
+  margin: 0;
+}
+.lfooterLeft span {
+  font-size: 12px;
+  padding: 2px 8px;
+  margin-right: 4px;
+  border: 1px solid #433765;
+  border-radius: 4px;
+}
+
+.lfooterRight p {
+  margin: 0;
+  font-size: 14px;
+}
+#right {
+  flex: 1;
+}
+.tabContainer {
+  height: 84%;
+}
+.tabs {
+  display: flex;
+}
+.tab {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+.tab.active {
+  background-color: #321649;
+  border-radius: 4px 4px 0 0;
+}
+.tabcontents {
+  height: 100%;
+  background-color: #321649;
+  padding: 16px;
+  border-radius: 0 4px 4px 4px;
+}
+.tabcontent {
+  padding: 16px 32px;
+  background-color: #433765;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  text-align: left;
+}
+.tabcontent .contentHeader {
+  display: flex;
+  justify-content: space-between;
+}
+.contentHeader .contentStatus {
+  font-size: 14px;
+}
+.tabcontent .contentitem {
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  background-color: #321649;
+  font-size: 12px;
+}
+.tabcontent .contentitem span {
+  color: rgb(160, 160, 255);
+}
