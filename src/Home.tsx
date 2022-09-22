@@ -902,7 +902,6 @@ const Home = (props: HomeProps) => {
                           <span>70% (2333/3333) Minted</span>
                           <div className="mintbtn">Mint</div>
                         </div>
-                        <br />
                         <div className="remaining">1000 Remaining</div>
                         <LinearProgress variant="buffer" value={70} />
                       </div>
