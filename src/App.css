@@ -60,9 +60,29 @@ h3 {
 #right {
   flex: 1;
 }
-.tabContainer {
-  height: 84%;
+
+.tabcontbuttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
 }
+.tabcontbuttons .contbtn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 0.2s ease-out;
+}
+.tabcontbuttons .contbtn:hover {
+  filter: brightness(0.8);
+}
+.tabcontbuttons .contbtn:first-child {
+  background-color: #321649;
+}
+.tabcontbuttons .contbtn:last-child {
+  background-image: linear-gradient(to right, yellowgreen, teal);
+}
+
 .tabs {
   display: flex;
 }
@@ -103,4 +123,7 @@ h3 {
 }
 .tabcontent .contentitem span {
   color: rgb(160, 160, 255);
+}
+.tabFooter {
+  background-color: #433765;
 }

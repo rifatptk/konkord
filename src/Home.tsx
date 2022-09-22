@@ -223,7 +223,6 @@ export interface HomeProps {
 const tabData = [
   {
     id: 1,
-
     name: "Mint",
     contents: [
       {
@@ -245,7 +244,6 @@ const tabData = [
   },
   {
     id: 2,
-
     name: "Roadmap",
     contents: [
       {
@@ -267,7 +265,6 @@ const tabData = [
   },
   {
     id: 3,
-
     name: "Team",
     contents: [
       {
@@ -854,6 +851,12 @@ const Home = (props: HomeProps) => {
                 </div>
                 <div id="right">
                   <div className="tabContainer">
+                    <div className="tabcontbuttons">
+                      <div className="contbtn">
+                        Solana Network: <span>2,358 TPS</span>
+                      </div>
+                      <div className="contbtn">Connect Wallet</div>
+                    </div>
                     <div className="tabs">
                       {tabData.map((tab) => (
                         <div
