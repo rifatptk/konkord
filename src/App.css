@@ -124,6 +124,30 @@ h3 {
 .tabcontent .contentitem span {
   color: rgb(160, 160, 255);
 }
-.tabFooter {
-  background-color: #433765;
+.tabfooter .footertop {
+  display: flex;
+  justify-content: space-between;
+}
+.mintbtn {
+  padding: 4px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: filter 0.2s ease-out;
+  background-color: #4c8bf5;
+}
+.mintbtn:hover {
+  filter: brightness(0.8);
+}
+.remaining {
+  font-size: 14px;
+  text-align: left;
+  color: #4c8bf5;
+  margin-bottom: 4px;
+}
+.MuiLinearProgress-root {
+  height: 8px !important;
+  border-radius: 4px;
+}
+.MuiLinearProgress-barColorPrimary {
+  background-image: linear-gradient(to right, yellowgreen, teal);
 }

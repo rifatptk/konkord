@@ -897,6 +897,15 @@ const Home = (props: HomeProps) => {
                             ))}
                           </div>
                         ))}
+                      <div className="tabfooter">
+                        <div className="footertop">
+                          <span>70% (2333/3333) Minted</span>
+                          <div className="mintbtn">Mint</div>
+                        </div>
+                        <br />
+                        <div className="remaining">1000 Remaining</div>
+                        <LinearProgress variant="buffer" value={70} />
+                      </div>
                     </div>
                   </div>
                 </div>
