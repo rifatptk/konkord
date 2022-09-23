@@ -224,65 +224,14 @@ const tabData = [
   {
     id: 1,
     name: "Mint",
-    contents: [
-      {
-        title: "Whitelist",
-        status: "Live",
-        items: { Count: 2356, Limit: 1, Price: "Free" },
-      },
-      {
-        title: "Public",
-        status: "Starts in 00:23:00",
-        items: { Limit: 2, Price: "Free" },
-      },
-      {
-        title: "Personal",
-        status: "Starts in 00:12:00",
-        items: { Limit: 2, Price: "Free" },
-      },
-    ],
   },
   {
     id: 2,
     name: "Roadmap",
-    contents: [
-      {
-        title: "Whitelist-2",
-        status: "Starts in 00:12:00",
-        items: { Limit: 2, Price: "Free" },
-      },
-      {
-        title: "Public-2",
-        status: "Live",
-        items: { Count: 2356, Limit: 1, Price: "Free" },
-      },
-      {
-        title: "Personal-2",
-        status: "Starts in 00:23:00",
-        items: { Limit: 2, Price: "Free" },
-      },
-    ],
   },
   {
     id: 3,
     name: "Team",
-    contents: [
-      {
-        title: "Whitelist-3",
-        status: "Starts in 00:12:00",
-        items: { Count: 2356, Limit: 1, Price: "Free" },
-      },
-      {
-        title: "Public-3",
-        status: "Starts in 00:23:00",
-        items: { Limit: 2, Price: "Free" },
-      },
-      {
-        title: "Personal-3",
-        status: "Live",
-        items: { Count: 2356, Limit: 1, Price: "Free" },
-      },
-    ],
   },
 ];
 
@@ -870,34 +819,193 @@ const Home = (props: HomeProps) => {
                         </div>
                       ))}
                     </div>
+
                     <div className="tabcontents">
-                      {tabData
-                        .find((tab) => tab.id === selectedTab)
-                        ?.contents.map((data, i) => (
-                          <div key={i} className="tabcontent">
+                      {selectedTab === 1 && (
+                        <>
+                          <div className="tabcontent">
                             <div className="contentHeader">
-                              <span className="contentTitle">{data.title}</span>
+                              <span className="contentTitle">Whitelist</span>
                               <span
                                 className="contentStatus"
                                 style={{
-                                  color:
-                                    data.status === "Live"
-                                      ? "rgb(160, 160, 255)"
-                                      : "",
+                                  color: "rgb(160, 160, 255)",
                                 }}
                               >
-                                {data.status}
+                                Live
                               </span>
                             </div>
-                            {Object.entries(data.items).map((itm, i) => (
-                              <small key={i} className="contentitem">
-                                <span>{itm[0]} : </span>
-                                {itm[1]}
-                              </small>
-                            ))}
+
+                            <small className="contentitem">
+                              <span>Count : </span>
+                              2356
+                            </small>
+                            <small className="contentitem">
+                              <span>Limit : </span>1
+                            </small>
+                            <small className="contentitem">
+                              <span>Price : </span>
+                              Free
+                            </small>
                           </div>
-                        ))}
-                      <div className="tabfooter">
+
+                          <div className="tabcontent">
+                            <div className="contentHeader">
+                              <span className="contentTitle">Public</span>
+                              <span
+                                className="contentStatus"
+                                style={{
+                                  color: "rgb(160, 160, 255)",
+                                }}
+                              >
+                                Starts in 00:23:00
+                              </span>
+                            </div>
+
+                            <small className="contentitem">
+                              <span>Limit : </span>2
+                            </small>
+                            <small className="contentitem">
+                              <span>Price : </span>
+                              Free
+                            </small>
+                          </div>
+                          <div className="tabcontent">
+                            <div className="contentHeader">
+                              <span className="contentTitle">Personal</span>
+                              <span
+                                className="contentStatus"
+                                style={{
+                                  color: "rgb(160, 160, 255)",
+                                }}
+                              >
+                                Starts in 00:12:00
+                              </span>
+                            </div>
+
+                            <small className="contentitem">
+                              <span>Limit : </span>2
+                            </small>
+                            <small className="contentitem">
+                              <span>Price : </span>
+                              Free
+                            </small>
+                          </div>
+                        </>
+                      )}
+                      {selectedTab === 2 && (
+                        <div style={{ paddingBottom: "80px" }}>
+                          <div className="tabcontent">
+                            <small>
+                              Phantasia Sports has a live daily and season long
+                              fantasy sports platform available on mobile for
+                              apple and android devices as well as desktop. The
+                              team will continue to add features to both the
+                              daily and season long fantasy sports products for
+                              the upcoming NFL season and for additional sports.{" "}
+                              <br />
+                              <br />
+                              Partnering with athletes such as Aaron Jones,
+                              Phantasia is able to offer users benefits while
+                              they’re playing fantasy sports contests and the
+                              ability to own athlete digital collectibles. These
+                              collectibles can be used on the platform for:
+                              showing off users identity, entering NFT holder
+                              exclusive contests, winning prizes, and an
+                              exclusive discord channel. <br />
+                              <br />
+                              In the future, Phantasia’s users can expect
+                              additional athlete partnerships and more ways to
+                              show their fan loyalty such as custom merch and
+                              experiences.
+                            </small>
+                          </div>
+                        </div>
+                      )}
+                      {selectedTab === 3 && (
+                        <div style={{ paddingBottom: "80px" }}>
+                          <div className="tabcontent">
+                            <div className="contentHeader">
+                              <span className="contentTitle">
+                                Hercules Sensei
+                              </span>
+                              <a
+                                href="http://www.twitter.com/#"
+                                className="contentStatus"
+                                style={{
+                                  color: "rgb(160, 160, 255)",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                Twitter
+                              </a>
+                            </div>
+
+                            <small>
+                              Background in private equity and marketing data
+                              analysis. Entrepreneur and founder of a
+                              business-process-outsourcing agency that handled
+                              clients in the financial technology sector in the
+                              U.S. Having an active role in the Bitcoin advocacy
+                              and education initiatives in El Salvador.
+                            </small>
+                          </div>
+
+                          <div className="tabcontent">
+                            <div className="contentHeader">
+                              <span className="contentTitle">Zaru Sensei</span>
+                              <a
+                                href="http://www.twitter.com/#"
+                                className="contentStatus"
+                                style={{
+                                  color: "rgb(160, 160, 255)",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                Twitter
+                              </a>
+                            </div>
+
+                            <small>
+                              Creative direction and illustration with a passion
+                              for character development. Extensive background
+                              working in brand campaigns for numerable
+                              multinational brands and music events. Looking to
+                              grow Sensei to the most creative lore-driven
+                              ecosystem to support the utility and tools.
+                            </small>
+                          </div>
+                          <div className="tabcontent">
+                            <div className="contentHeader">
+                              <span className="contentTitle">Kev Sensei</span>
+                              <a
+                                href="http://www.twitter.com/#"
+                                className="contentStatus"
+                                style={{
+                                  color: "rgb(160, 160, 255)",
+                                  textDecoration: "none",
+                                }}
+                              >
+                                Twitter
+                              </a>
+                            </div>
+
+                            <small>
+                              Front-end oriented software engineer with a
+                              background in the banking industry and
+                              transitioning to the Web 3 space. Passionate about
+                              creating clean tech experiences and highly
+                              interested in the capabilities of blockchain
+                              technology. Wants Sensei Labs to become a leading
+                              brand through its innovative tech.
+                            </small>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="tabfooter">
+                      <div className="footerContent">
                         <div className="footertop">
                           <span>70% (2333/3333) Minted</span>
                           <div className="mintbtn">Mint</div>

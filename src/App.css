@@ -24,6 +24,28 @@ h3 {
   font-weight: normal;
 }
 
+/* scrollbar */
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #0d061f;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #888;
+}
+
 #innerContainer {
   padding: 16px;
   background-color: #180b3a;
@@ -31,6 +53,7 @@ h3 {
   display: flex;
   justify-content: space-between;
   margin-bottom: 16px;
+  width: 80vw;
 }
 #left {
   flex: 1;
@@ -60,6 +83,10 @@ h3 {
 }
 #right {
   flex: 1;
+  width: 50%;
+}
+.tabContainer {
+  position: relative;
 }
 
 .tabcontbuttons {
@@ -96,11 +123,13 @@ h3 {
   border-radius: 4px 4px 0 0;
 }
 .tabcontents {
-  height: 100%;
+  height: 400px;
+  overflow-y: auto;
   background-color: #321649;
   padding: 16px;
   border-radius: 0 4px 4px 4px;
 }
+
 .tabcontent {
   padding: 16px 32px;
   background-color: #433765;
@@ -114,7 +143,13 @@ h3 {
 }
 .contentHeader .contentStatus {
   font-size: 14px;
+  cursor: pointer;
+  transition: color 0.2s ease-out;
 }
+.contentHeader .contentStatus:hover {
+  color: white !important;
+}
+
 .tabcontent .contentitem {
   padding: 4px 8px;
   border-radius: 4px;
@@ -125,7 +160,19 @@ h3 {
 .tabcontent .contentitem span {
   color: rgb(160, 160, 255);
 }
+
+.tabfooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #321649;
+}
+.footerContent {
+  padding: 16px;
+}
 .tabfooter .footertop {
+  padding-bottom: 0;
   display: flex;
   justify-content: space-between;
 }
