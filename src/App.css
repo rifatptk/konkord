@@ -9,9 +9,9 @@
 
 body {
   /*  background-color:var(--main-background-color);*/
-  background: url("img/background.png");
+  background: url('img/background.png');
   background-size: cover;
-  font-family: "Baloo 2", cursive;
+  font-family: 'Baloo 2', cursive;
   font-size: 1.1em;
 }
 
@@ -52,11 +52,14 @@ h3 {
   border-radius: 4px;
   display: flex;
   justify-content: space-between;
-  margin-bottom: 16px;
+  /* margin-bottom: 16px; */
   width: 80vw;
 }
 #left {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .leftFooter {
   display: flex;
@@ -86,7 +89,10 @@ h3 {
   width: 50%;
 }
 .tabContainer {
+  height: 100%;
   position: relative;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .tabcontbuttons {
@@ -167,6 +173,7 @@ h3 {
   left: 0;
   width: 100%;
   background-color: #321649;
+  border-radius: 0 0 4px 4px;
 }
 .footerContent {
   padding: 16px;

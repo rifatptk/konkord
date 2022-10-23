@@ -1,23 +1,23 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
-import styled from "styled-components";
-import confetti from "canvas-confetti";
-import * as anchor from "@project-serum/anchor";
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import styled from 'styled-components';
+import confetti from 'canvas-confetti';
+import * as anchor from '@project-serum/anchor';
 import {
   Commitment,
   Connection,
   PublicKey,
   Transaction,
   LAMPORTS_PER_SOL,
-} from "@solana/web3.js";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { WalletMultiButton } from "@solana/wallet-adapter-react-ui";
-import { GatewayProvider } from "@civic/solana-gateway-react";
-import Countdown from "react-countdown";
-import { Snackbar, Paper, LinearProgress, Chip } from "@material-ui/core";
-import Alert from "@material-ui/lab/Alert";
-import { AlertState, getAtaForMint, toDate } from "./utils";
-import { MintButton } from "./MintButton";
+} from '@solana/web3.js';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { GatewayProvider } from '@civic/solana-gateway-react';
+import Countdown from 'react-countdown';
+import { Snackbar, Paper, LinearProgress, Chip } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
+import { AlertState, getAtaForMint, toDate } from './utils';
+import { MintButton } from './MintButton';
 import {
   awaitTransactionSignatureConfirmation,
   CANDY_MACHINE_PROGRAM,
@@ -27,7 +27,7 @@ import {
   getCollectionPDA,
   mintOneToken,
   SetupState,
-} from "./candy-machine";
+} from './candy-machine';
 
 const cluster = process.env.REACT_APP_SOLANA_NETWORK!.toString();
 const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS
@@ -35,7 +35,7 @@ const decimals = process.env.REACT_APP_SPL_TOKEN_TO_MINT_DECIMALS
   : 9;
 const splTokenName = process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME
   ? process.env.REACT_APP_SPL_TOKEN_TO_MINT_NAME.toString()
-  : "TOKEN";
+  : 'TOKEN';
 
 const WalletContainer = styled.div`
   display: flex;
@@ -88,7 +88,7 @@ const ConnectButton = styled(WalletMultiButton)`
 
 const NFT = styled(Paper)`
   flex-direction: row;
-  min-width: 1000px;
+  /* min-width: 1000px; */
   margin: 0 auto;
   padding: 20px 20px 20px 20px;
   flex: 1 1 auto;
@@ -109,6 +109,7 @@ const Card = styled(Paper)`
 `;
 
 const MintButtonContainer = styled.div`
+  margin-top: 16px;
   button.MuiButton-contained:not(.MuiButton-containedPrimary).Mui-disabled {
     color: #464646;
   }
@@ -180,12 +181,13 @@ const Price = styled(Chip)`
   margin: 5px;
   font-weight: bold;
   font-size: 1.2em !important;
-  font-family: "Baloo 2", cursive !important;
+  font-family: 'Baloo 2', cursive !important;
 `;
 
 const Image = styled.img`
   height: 400px;
-  width: auto;
+  width: 90%;
+  object-fit: cover;
   border-radius: 7px;
   box-shadow: 5px 5px 40px 5px rgba(0, 0, 0, 0.5);
 `;
@@ -223,15 +225,15 @@ export interface HomeProps {
 const tabData = [
   {
     id: 1,
-    name: "Mint",
+    name: 'Mint',
   },
   {
     id: 2,
-    name: "Roadmap",
+    name: 'Roadmap',
   },
   {
     id: 3,
-    name: "Team",
+    name: 'Team',
   },
 ];
 
@@ -241,14 +243,14 @@ const Home = (props: HomeProps) => {
   const [balance, setBalance] = useState<number>();
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
   const [isActive, setIsActive] = useState(false); // true when countdown completes or whitelisted
-  const [solanaExplorerLink, setSolanaExplorerLink] = useState<string>("");
+  const [solanaExplorerLink, setSolanaExplorerLink] = useState<string>('');
   const [itemsAvailable, setItemsAvailable] = useState(0);
   const [itemsRedeemed, setItemsRedeemed] = useState(0);
   const [itemsRemaining, setItemsRemaining] = useState(0);
   const [isSoldOut, setIsSoldOut] = useState(false);
   const [payWithSplToken, setPayWithSplToken] = useState(false);
   const [price, setPrice] = useState(0);
-  const [priceLabel, setPriceLabel] = useState<string>("SOL");
+  const [priceLabel, setPriceLabel] = useState<string>('SOL');
   const [whitelistPrice, setWhitelistPrice] = useState(0);
   const [whitelistEnabled, setWhitelistEnabled] = useState(false);
   const [isBurnToken, setIsBurnToken] = useState(false);
@@ -260,7 +262,7 @@ const Home = (props: HomeProps) => {
 
   const [alertState, setAlertState] = useState<AlertState>({
     open: false,
-    message: "",
+    message: '',
     severity: undefined,
   });
 
@@ -291,7 +293,7 @@ const Home = (props: HomeProps) => {
   }, [wallet]);
 
   const refreshCandyMachineState = useCallback(
-    async (commitment: Commitment = "confirmed") => {
+    async (commitment: Commitment = 'confirmed') => {
       if (!anchorWallet) {
         return;
       }
@@ -313,7 +315,7 @@ const Home = (props: HomeProps) => {
 
           var divider = 1;
           if (decimals) {
-            divider = +("1" + new Array(decimals).join("0").slice() + "0");
+            divider = +('1' + new Array(decimals).join('0').slice() + '0');
           }
 
           // detect if using spl-token to mint
@@ -374,7 +376,7 @@ const Home = (props: HomeProps) => {
               console.error(e);
               balance = 0;
             }
-            if (commitment !== "processed") {
+            if (commitment !== 'processed') {
               setWhitelistTokenBalance(balance);
             }
             setIsActive(isPresale && !isEnded && balance > 0);
@@ -438,16 +440,16 @@ const Home = (props: HomeProps) => {
               setAlertState({
                 open: true,
                 message: `Couldn't fetch candy machine state from candy machine with address: ${props.candyMachineId}, using rpc: ${props.rpcHost}! You probably typed the REACT_APP_CANDY_MACHINE_ID value in wrong in your .env file, or you are using the wrong RPC!`,
-                severity: "error",
+                severity: 'error',
                 hideDuration: null,
               });
             } else if (
-              e.message.startsWith("failed to get info about account")
+              e.message.startsWith('failed to get info about account')
             ) {
               setAlertState({
                 open: true,
                 message: `Couldn't fetch candy machine state with rpc: ${props.rpcHost}! This probably means you have an issue with the REACT_APP_SOLANA_RPC_HOST value in your .env file, or you are not using a custom RPC!`,
-                severity: "error",
+                severity: 'error',
                 hideDuration: null,
               });
             }
@@ -455,7 +457,7 @@ const Home = (props: HomeProps) => {
             setAlertState({
               open: true,
               message: `${e}`,
-              severity: "error",
+              severity: 'error',
               hideDuration: null,
             });
           }
@@ -465,7 +467,7 @@ const Home = (props: HomeProps) => {
         setAlertState({
           open: true,
           message: `Your REACT_APP_CANDY_MACHINE_ID value in the .env file doesn't look right! Make sure you enter it in as plain base-58 address!`,
-          severity: "error",
+          severity: 'error',
           hideDuration: null,
         });
       }
@@ -501,14 +503,14 @@ const Home = (props: HomeProps) => {
   };
 
   const renderEndDateCounter = ({ days, hours, minutes }: any) => {
-    let label = "";
+    let label = '';
     if (days > 0) {
-      label += days + " days ";
+      label += days + ' days ';
     }
     if (hours > 0) {
-      label += hours + " hours ";
+      label += hours + ' hours ';
     }
-    label += minutes + 1 + " minutes left to MINT.";
+    label += minutes + 1 + ' minutes left to MINT.';
     return (
       <div>
         <h3>{label}</h3>
@@ -535,9 +537,9 @@ const Home = (props: HomeProps) => {
       );
     }
     setSolanaExplorerLink(
-      cluster === "devnet" || cluster === "testnet"
-        ? "https://solscan.io/token/" + mintPublicKey + "?cluster=" + cluster
-        : "https://solscan.io/token/" + mintPublicKey
+      cluster === 'devnet' || cluster === 'testnet'
+        ? 'https://solscan.io/token/' + mintPublicKey + '?cluster=' + cluster
+        : 'https://solscan.io/token/' + mintPublicKey
     );
     setIsMinting(false);
     throwConfetti();
@@ -562,8 +564,8 @@ const Home = (props: HomeProps) => {
         if (needTxnSplit && setupTxn === undefined) {
           setAlertState({
             open: true,
-            message: "Please validate account setup transaction",
-            severity: "info",
+            message: 'Please validate account setup transaction',
+            severity: 'info',
           });
           setupMint = await createAccountsForMint(
             candyMachine,
@@ -583,14 +585,14 @@ const Home = (props: HomeProps) => {
             setAlertState({
               open: true,
               message:
-                "Setup transaction succeeded! You can now validate mint transaction",
-              severity: "info",
+                'Setup transaction succeeded! You can now validate mint transaction',
+              severity: 'info',
             });
           } else {
             setAlertState({
               open: true,
-              message: "Mint failed! Please try again!",
-              severity: "error",
+              message: 'Mint failed! Please try again!',
+              severity: 'error',
             });
             return;
           }
@@ -620,48 +622,48 @@ const Home = (props: HomeProps) => {
           metadataStatus =
             await candyMachine.program.provider.connection.getAccountInfo(
               mintResult.metadataKey,
-              "processed"
+              'processed'
             );
-          console.log("Metadata status: ", !!metadataStatus);
+          console.log('Metadata status: ', !!metadataStatus);
         }
 
         if (status && !status.err && metadataStatus) {
           setAlertState({
             open: true,
-            message: "Congratulations! Mint succeeded!",
-            severity: "success",
+            message: 'Congratulations! Mint succeeded!',
+            severity: 'success',
           });
 
           // update front-end amounts
           displaySuccess(mint.publicKey);
-          refreshCandyMachineState("processed");
+          refreshCandyMachineState('processed');
         } else if (status && !status.err) {
           setAlertState({
             open: true,
             message:
-              "Mint likely failed! Anti-bot SOL 0.01 fee potentially charged! Check the explorer to confirm the mint failed and if so, make sure you are eligible to mint before trying again.",
-            severity: "error",
+              'Mint likely failed! Anti-bot SOL 0.01 fee potentially charged! Check the explorer to confirm the mint failed and if so, make sure you are eligible to mint before trying again.',
+            severity: 'error',
             hideDuration: 8000,
           });
           refreshCandyMachineState();
         } else {
           setAlertState({
             open: true,
-            message: "Mint failed! Please try again!",
-            severity: "error",
+            message: 'Mint failed! Please try again!',
+            severity: 'error',
           });
           refreshCandyMachineState();
         }
       }
     } catch (error: any) {
-      let message = error.msg || "Minting failed! Please try again!";
+      let message = error.msg || 'Minting failed! Please try again!';
       if (!error.msg) {
         if (!error.message) {
-          message = "Transaction Timeout! Please try again.";
-        } else if (error.message.indexOf("0x138")) {
-        } else if (error.message.indexOf("0x137")) {
+          message = 'Transaction Timeout! Please try again.';
+        } else if (error.message.indexOf('0x138')) {
+        } else if (error.message.indexOf('0x137')) {
           message = `SOLD OUT!`;
-        } else if (error.message.indexOf("0x135")) {
+        } else if (error.message.indexOf('0x135')) {
           message = `Insufficient funds to mint. Please fund your wallet.`;
         }
       } else {
@@ -675,7 +677,7 @@ const Home = (props: HomeProps) => {
       setAlertState({
         open: true,
         message,
-        severity: "error",
+        severity: 'error',
       });
     } finally {
       setIsMinting(false);
@@ -732,8 +734,8 @@ const Home = (props: HomeProps) => {
                         isActive &&
                         whitelistEnabled &&
                         whitelistTokenBalance > 0
-                          ? whitelistPrice + " " + priceLabel
-                          : price + " " + priceLabel
+                          ? whitelistPrice + ' ' + priceLabel
+                          : price + ' ' + priceLabel
                       }
                     />
                     <Image src="konkord-logo-white-bg.png" alt="NFT To Mint" />
@@ -760,8 +762,8 @@ const Home = (props: HomeProps) => {
                     whitelistTokenBalance > 0 &&
                     isBurnToken && (
                       <h3>
-                        You own {whitelistTokenBalance} WL mint{" "}
-                        {whitelistTokenBalance > 1 ? "tokens" : "token"}.
+                        You own {whitelistTokenBalance} WL mint{' '}
+                        {whitelistTokenBalance > 1 ? 'tokens' : 'token'}.
                       </h3>
                     )}
                   {wallet &&
@@ -806,13 +808,14 @@ const Home = (props: HomeProps) => {
                       </div>
                       <div className="contbtn">Connect Wallet</div>
                     </div>
+
                     <div className="tabs">
                       {tabData.map((tab) => (
                         <div
                           key={tab.id}
                           onClick={() => setSelectedTab(tab.id)}
                           className={`tab ${
-                            selectedTab === tab.id && "active"
+                            selectedTab === tab.id && 'active'
                           }`}
                         >
                           {tab.name}
@@ -829,7 +832,7 @@ const Home = (props: HomeProps) => {
                               <span
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
+                                  color: 'rgb(160, 160, 255)',
                                 }}
                               >
                                 Live
@@ -855,7 +858,7 @@ const Home = (props: HomeProps) => {
                               <span
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
+                                  color: 'rgb(160, 160, 255)',
                                 }}
                               >
                                 Starts in 00:23:00
@@ -876,7 +879,7 @@ const Home = (props: HomeProps) => {
                               <span
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
+                                  color: 'rgb(160, 160, 255)',
                                 }}
                               >
                                 Starts in 00:12:00
@@ -894,7 +897,7 @@ const Home = (props: HomeProps) => {
                         </>
                       )}
                       {selectedTab === 2 && (
-                        <div style={{ paddingBottom: "80px" }}>
+                        <div style={{ paddingBottom: '80px' }}>
                           <div className="tabcontent">
                             <small>
                               Phantasia Sports has a live daily and season long
@@ -902,7 +905,7 @@ const Home = (props: HomeProps) => {
                               apple and android devices as well as desktop. The
                               team will continue to add features to both the
                               daily and season long fantasy sports products for
-                              the upcoming NFL season and for additional sports.{" "}
+                              the upcoming NFL season and for additional sports.{' '}
                               <br />
                               <br />
                               Partnering with athletes such as Aaron Jones,
@@ -923,7 +926,7 @@ const Home = (props: HomeProps) => {
                         </div>
                       )}
                       {selectedTab === 3 && (
-                        <div style={{ paddingBottom: "80px" }}>
+                        <div style={{ paddingBottom: '80px' }}>
                           <div className="tabcontent">
                             <div className="contentHeader">
                               <span className="contentTitle">
@@ -933,8 +936,8 @@ const Home = (props: HomeProps) => {
                                 href="http://www.twitter.com/#"
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
-                                  textDecoration: "none",
+                                  color: 'rgb(160, 160, 255)',
+                                  textDecoration: 'none',
                                 }}
                               >
                                 Twitter
@@ -958,8 +961,8 @@ const Home = (props: HomeProps) => {
                                 href="http://www.twitter.com/#"
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
-                                  textDecoration: "none",
+                                  color: 'rgb(160, 160, 255)',
+                                  textDecoration: 'none',
                                 }}
                               >
                                 Twitter
@@ -982,8 +985,8 @@ const Home = (props: HomeProps) => {
                                 href="http://www.twitter.com/#"
                                 className="contentStatus"
                                 style={{
-                                  color: "rgb(160, 160, 255)",
-                                  textDecoration: "none",
+                                  color: 'rgb(160, 160, 255)',
+                                  textDecoration: 'none',
                                 }}
                               >
                                 Twitter
@@ -1081,7 +1084,6 @@ const Home = (props: HomeProps) => {
                   <h1>Mint is private.</h1>
                 )}
               </MintButtonContainer>
-              <br />
               {wallet && isActive && solanaExplorerLink && (
                 <SolExplorerLink href={solanaExplorerLink} target="_blank">
                   View on Solscan
